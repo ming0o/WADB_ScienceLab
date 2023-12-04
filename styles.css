@@ -1,0 +1,180 @@
+#earth {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#clouds {
+    margin-top: 25%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60%;
+    height: 40%;
+    animation: cloudAnimation 10s linear infinite;
+}
+
+@keyframes cloudAnimation {
+    from {
+        transform: translateX(-110%);
+    }
+
+    to {
+        transform: translateX(150%);
+    }
+}
+
+body {
+    background-color: #D6E6F3;
+    overflow-x: hidden;
+}
+
+.astronaut {
+    width: 50vw;
+    height: 80vh;
+    position: fixed;
+    background-image: url('resources/astronautarticle.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 2;
+    top: -10vh;
+    left: 0;
+    transform: rotate(110deg);
+}
+
+.earth {
+    width: 50vw;
+    height: 80vh;
+    position: fixed;
+    background-image: url('resources/eartharticle.png');
+    background-size: cover;
+    top: -15vh;
+    right: 10vw;
+    z-index: 1;
+    transform: rotate(200deg);
+    margin-right: 10%;
+}
+
+.universe {
+    width: 60vw;
+    height: 80vh;
+    position: fixed;
+    /* background-image: url('resources/universearticle.png');
+    background-size: contain;
+    background-repeat: no-repeat; */
+    z-index: 2;
+    bottom: -10vh;
+    right: -20%;
+    transform: rotate(-30deg);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+
+.uni_main {
+    background-image: url('resources/uni_main.png');
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+    padding: 3%;
+}
+
+.uni_title {
+    background-image: url('resources/uni_title.png');
+    width: 100%;
+    height: 30%;
+    background-repeat: no-repeat;
+}
+
+.uni_page {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+.uni_pic_wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 50%;
+    height: 75%;
+    z-index: 1;
+}
+
+#uni_pic {
+    width: 100%;
+    height: 85%;
+    background-repeat: no-repeat;
+}
+
+.uni_article {
+    background-image: url('resources/uni_article.png');
+    width: 50%;
+    height: 100%;
+    background-repeat: no-repeat;
+}
+
+#uni_rocket {
+    width: 100px;
+    height: 90px;
+    position: absolute;
+    bottom: 20%;
+    left: 20%;
+    transition: top 2s ease-in-out, left 2s ease-in-out;
+    z-index: 2;
+}
+
+.rocket-fly {
+    top: -20%;
+    left: 110%;
+}
+
+.moon {
+    width: 60vw;
+    height: 90vh;
+    position: fixed;
+    background-image: url('resources/moonarticle.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 3;
+    bottom: -30%;
+    left: -5%;
+    transform: rotate(30deg);
+}
+
+.astronaut,
+.earth,
+.moon,
+.universe {
+    transition: transform 0.3s ease;
+}
+
+.darken {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    z-index: 0;
+}
+
+.modal__box {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+    border-radius: 10px;
+    width: 300px;
+    height: 100px;
+    z-index: 10;
+    margin-bottom: 50px;
+    margin-left: 50px;
+    padding: 10px;
+}

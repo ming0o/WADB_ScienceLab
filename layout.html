@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css"> 
+</head>
+
+<body>
+    <div class="astronaut"></div>
+    <div class="earth"></div>
+    <div class="moon"></div>
+    <div class="universe">
+        <div class="uni_shadow"></div>
+        <div class="uni_main">
+            <div class="uni_title"></div>
+            <div class="uni_page">
+                <div class="uni_pic_wrapper">
+                    <img src="resources/uni_pic.png" id="uni_pic">
+                    <img src="resources/uni_rocket.png" id="uni_rocket">
+                </div>
+                <div class="uni_article"></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" style="display: none;"> <!-- 초기에 모달 숨기기 -->
+        <div class="modal__box">
+            <!-- 모달 내용 -->
+            <span class="close">&times;</span>
+            <p>모달 내용</p>
+        </div>
+    </div>
+    <div class="darken"></div>
+    <script src="script.js"></script> <!-- 자바스크립트 파일 링크 -->
+</body>
+
+</html>
