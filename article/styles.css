@@ -1,49 +1,56 @@
-.earth_pic {
-    position: relative;
-    text-align: center; 
-}
-
-.earth_back {
-    position: relative; /* 지구 그림 위치를 상대적으로 설정 */
-    z-index: 1; /* clouds보다 위에 위치하도록 설정 */
-}
-
-.clouds {
-    position: absolute;
-    top: 30%; /* 지구 그림 상단에 clouds 위치 */
-    left: 25%; /* 지구 그림 왼쪽에 clouds 위치 */
-    z-index: 2; /* 지구 그림 뒤에 위치하도록 설정 */
-    animation: motion 2s linear infinite alternate; /* clouds 애니메이션 설정 */
-}
-
-@keyframes motion {
-	0% { transform: translateY(0); }
-	100% { transform: translateY(-20px); } /* 위로 20px 움직이는 애니메이션 */
-}
-
 body {
     background-color: #D6E6F3;
 }
 
 .astronaut {
-    width: 50vw;
-    height: 80vh;
+    width:700px;
+    height: 800px;
     position: fixed;
-    background-image: url('resources/astronautarticle.png');
-    background-size: contain;
+    background-image: url('resources/as_page.png');
+    background-size: cover;
     background-repeat: no-repeat;
     z-index: 2;
-    top: -10vh;
-    left: 0;
-    transform: rotate(110deg);
+    top: -15vh;
+    left: -30px;
+    transform: rotate(100deg);
+    padding: 5%;
+}
+
+.as_pic {
+    position: relative;    
+    text-align: center; 
+    margin-top: 23%;
+}
+
+.univ_pic {
+    position: relative; 
+    z-index: 2;
+    width: 650px;
+}
+
+.ast {
+    position: absolute;
+    top: 13%; 
+    left: 35%;
+    z-index: 3; 
+}
+
+.ast.animate {
+    animation: motion 3s linear infinite alternate;
+}
+
+@keyframes motion {
+	0% { transform: translateY(5px); }
+	100% { transform: translateY(-5px); } /* 위로 20px 움직이는 애니메이션 */
 }
 
 .earth {
-    width: 50vw;
-    height: 80vh;
+    width: 800px;
+    height: auto;
     position: fixed;
-    background-image: url('resources/eartharticle.png');
+    background-image: url('resources/earth1.png');
     background-size: cover;
+    background-repeat: no-repeat;
     top: -15vh;
     right: 10vw;
     z-index: 1;
@@ -51,23 +58,52 @@ body {
     margin-right: 10%;
 }
 
+
+.earth_pic {
+    position: relative;    
+    text-align: center; 
+    margin-top: 25%;
+}
+
+.earth_back {
+    position: relative; 
+    z-index: 1;
+    width: 650px;
+    margin-left: 40px;
+}
+
+.clouds {
+    position: absolute;
+    top: 30%; 
+    left: 25%;
+    z-index: 2; 
+}
+
+.clouds.animate {
+    animation: motion 1s linear infinite alternate;
+}
+
+@keyframes motion {
+	0% { transform: translateY(0); }
+	100% { transform: translateY(-20px); } /* 위로 20px 움직이는 애니메이션 */
+}
+
 .universe {
     width: 60vw;
     height: 80vh;
     position: fixed;
-    /* background-image: url('resources/universearticle.png');
-    background-size: contain;
-    background-repeat: no-repeat; */
     z-index: 2;
     bottom: -10vh;
     right: -20%;
     transform: rotate(-30deg);
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
 }
 
 
 .uni_main {
     background-image: url('resources/uni_main.png');
+    background-size: contain;
     position: relative;
     width: 100%;
     height: 100%;
@@ -77,18 +113,21 @@ body {
     padding: 3%;
 }
 
+.uni_title,
+.uni_title1 {
+    width: 100%;
+    height: 20%;
+    background-repeat: no-repeat;
+}
+
 .uni_title {
     background-image: url('resources/uni_title.png');
-    width: 100%;
-    height: 30%;
-    background-repeat: no-repeat;
+    display: block;
 }
 
 .uni_title1 {
     background-image: url('resources/uni_title1.png');
-    width: 100%;
-    height: 30%;
-    background-repeat: no-repeat;
+    display: none;
 }
 
 .uni_page {
@@ -136,17 +175,75 @@ body {
 }
 
 .moon {
-    width: 60vw;
+    width: 70vw;
     height: 90vh;
     position: fixed;
-    background-image: url('resources/moonarticle.png');
-    background-size: contain;
-    background-repeat: no-repeat;
     z-index: 3;
-    bottom: -30%;
+    bottom: -40%;
     left: -5%;
     transform: rotate(30deg);
+    box-sizing: border-box;
 }
+
+.mo_main {
+    background-image: url('resources/mo_main.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    z-index: 3;
+    padding: 3%;
+}
+
+.mo_title,
+.mo_title1 {
+    width: 100%;
+    height: 40%;
+    background-repeat: no-repeat;
+}
+
+.mo_title {
+    background-image: url('resources/mo_title.png');
+    display: block;
+}
+
+.mo_title1 {
+    background-image: url('resources/mo_title1.png');
+    display: none;
+}
+
+.mo_page {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+.mo_pic_wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 50%;
+    height: 75%;
+    z-index: 1;
+}
+
+#uni_pic {
+    width: 100%;
+    height: 85%;
+    background-repeat: no-repeat;
+}
+
+.uni_article {
+    background-image: url('resources/uni_article.png');
+    width: 50%;
+    height: 100%;
+    background-repeat: no-repeat;
+}
+
 
 .astronaut,
 .earth,
