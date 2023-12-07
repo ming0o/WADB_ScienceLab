@@ -3,8 +3,8 @@ body {
 }
 
 .astronaut {
-    width:700px;
-    height: 800px;
+    width:500px;
+    height: 600px;
     position: fixed;
     background-image: url('resources/as_page.png');
     background-size: cover;
@@ -14,6 +14,7 @@ body {
     left: -30px;
     transform: rotate(100deg);
     padding: 5%;
+    overflow: hidden;
 }
 
 .as_pic {
@@ -22,16 +23,30 @@ body {
     margin-top: 23%;
 }
 
+.as_pic::before {
+    /* 다른 스타일 속성들 */
+
+    opacity: 0; /* 초기에 투명하게 설정 */
+    transition: opacity 0.5s ease; /* Opacity 변화에 대한 트랜지션 효과 */
+}
+
+/* 클릭된 상태에서 호버 효과 */
+.astronaut.clicked:hover .as_pic::before {
+    opacity: 0.5;
+}
+
 .univ_pic {
     position: relative; 
     z-index: 2;
-    width: 650px;
+    width: 500px;
 }
 
 .ast {
     position: absolute;
-    top: 13%; 
+    top: 23%; 
     left: 35%;
+    width: 50%;
+    height: auto;
     z-index: 3; 
 }
 
@@ -40,8 +55,8 @@ body {
 }
 
 @keyframes motion {
-	0% { transform: translateY(5px); }
-	100% { transform: translateY(-5px); } /* 위로 20px 움직이는 애니메이션 */
+	0% { transform: translateY(2px); }
+	100% { transform: translateY(-2px); } /* 위로 20px 움직이는 애니메이션 */
 }
 
 .earth {
@@ -261,32 +276,4 @@ body {
     background-color: rgba(0, 0, 0, 0.8);
     opacity: 0;
     z-index: 0;
-}
-
-.modal_box1 {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    background-color: white;
-    border-radius: 10px;
-    width: 350px;
-    height: 100px;
-    z-index: 10;
-    margin-bottom: 50px;
-    margin-left: 50px;
-    padding: 10px;
-}
-
-.modal_box2 {
-    position: fixed;
-    top: 0;
-    right: 0;
-    background-color: white;
-    border-radius: 10px;
-    width: 350px;
-    height: 100px;
-    z-index: 10;
-    margin-top: 50px;
-    margin-right: 50px;
-    padding: 10px;
 }

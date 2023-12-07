@@ -147,11 +147,11 @@ earthpic.addEventListener("click", function() {
 });
 
 const aspic = document.querySelector(".astronaut");
-let isAst1 = true;
 
 aspic.addEventListener("click", function() {
-    isAst1 = !isAst1;
-    if (isAst1) {
+    const isClicked = aspic.classList.toggle('clicked');
+
+    if (isClicked) {
         aspic.style.backgroundImage = "url('resources/as_page.png')";
     } else {
         aspic.style.backgroundImage = "url('resources/as_page1.png')";
