@@ -1,12 +1,12 @@
 body {
-    background-color: #D6E6F3;
+    background-color: #d6e6f3;
 }
 
 .astronaut {
-    width:500px;
+    width: 500px;
     height: 600px;
     position: fixed;
-    background-image: url('resources/as_page.png');
+    background-image: url("resources/as_page.png");
     background-size: cover;
     background-repeat: no-repeat;
     z-index: 2;
@@ -17,37 +17,54 @@ body {
     overflow: hidden;
 }
 
+.darken1 {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.darken1:hover {
+    opacity: 0.4;
+}
+
 .as_pic {
-    position: relative;    
-    text-align: center; 
+    position: relative;
+    text-align: center;
     margin-top: 23%;
 }
 
+/* 이미지 위에 레이어를 만들고 초기에 숨김 */
 .as_pic::before {
-    /* 다른 스타일 속성들 */
-
-    opacity: 0; /* 초기에 투명하게 설정 */
-    transition: opacity 0.5s ease; /* Opacity 변화에 대한 트랜지션 효과 */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 5px;
+    background-color: black;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    /* 이벤트 방지 */
 }
 
-/* 클릭된 상태에서 호버 효과 */
-.astronaut.clicked:hover .as_pic::before {
-    opacity: 0.5;
+/* 호버 시 레이어를 표시 */
+.as_pic:hover::before {
+    opacity: 0.6;
 }
 
 .univ_pic {
-    position: relative; 
+    position: relative;
     z-index: 2;
     width: 500px;
 }
 
 .ast {
     position: absolute;
-    top: 23%; 
+    top: 23%;
     left: 35%;
     width: 50%;
     height: auto;
-    z-index: 3; 
+    z-index: 3;
 }
 
 .ast.animate {
@@ -55,33 +72,39 @@ body {
 }
 
 @keyframes motion {
-	0% { transform: translateY(2px); }
-	100% { transform: translateY(-2px); } /* 위로 20px 움직이는 애니메이션 */
+    0% {
+        transform: translateY(2px);
+    }
+
+    100% {
+        transform: translateY(-2px);
+    }
+
+    /* 위로 20px 움직이는 애니메이션 */
 }
 
 .earth {
     width: 800px;
     height: auto;
     position: fixed;
-    background-image: url('resources/earth1.png');
+    background-image: url("resources/earth1.png");
     background-size: cover;
     background-repeat: no-repeat;
-    top: -15vh;
-    right: 10vw;
+    top: -200px;
+    right: 150px;
     z-index: 1;
     transform: rotate(200deg);
     margin-right: 10%;
 }
 
-
 .earth_pic {
-    position: relative;    
-    text-align: center; 
+    position: relative;
+    text-align: center;
     margin-top: 25%;
 }
 
 .earth_back {
-    position: relative; 
+    position: relative;
     z-index: 1;
     width: 650px;
     margin-left: 40px;
@@ -89,9 +112,9 @@ body {
 
 .clouds {
     position: absolute;
-    top: 30%; 
+    top: 30%;
     left: 25%;
-    z-index: 2; 
+    z-index: 2;
 }
 
 .clouds.animate {
@@ -99,8 +122,15 @@ body {
 }
 
 @keyframes motion {
-	0% { transform: translateY(0); }
-	100% { transform: translateY(-20px); } /* 위로 20px 움직이는 애니메이션 */
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-20px);
+    }
+
+    /* 위로 20px 움직이는 애니메이션 */
 }
 
 .universe {
@@ -115,9 +145,8 @@ body {
     box-sizing: border-box;
 }
 
-
 .uni_main {
-    background-image: url('resources/uni_main.png');
+    background-image: url("resources/uni_main.png");
     background-size: contain;
     position: relative;
     width: 100%;
@@ -136,12 +165,12 @@ body {
 }
 
 .uni_title {
-    background-image: url('resources/uni_title.png');
+    background-image: url("resources/uni_title.png");
     display: block;
 }
 
 .uni_title1 {
-    background-image: url('resources/uni_title1.png');
+    background-image: url("resources/uni_title1.png");
     display: none;
 }
 
@@ -168,7 +197,7 @@ body {
 }
 
 .uni_article {
-    background-image: url('resources/uni_article.png');
+    background-image: url("resources/uni_article.png");
     width: 50%;
     height: 100%;
     background-repeat: no-repeat;
@@ -201,7 +230,7 @@ body {
 }
 
 .mo_main {
-    background-image: url('resources/mo_main.png');
+    background-image: url("resources/mo_main.png");
     background-size: contain;
     background-repeat: no-repeat;
     position: relative;
@@ -221,12 +250,12 @@ body {
 }
 
 .mo_title {
-    background-image: url('resources/mo_title.png');
+    background-image: url("resources/mo_title.png");
     display: block;
 }
 
 .mo_title1 {
-    background-image: url('resources/mo_title1.png');
+    background-image: url("resources/mo_title1.png");
     display: none;
 }
 
@@ -253,12 +282,11 @@ body {
 }
 
 .uni_article {
-    background-image: url('resources/uni_article.png');
+    background-image: url("resources/uni_article.png");
     width: 50%;
     height: 100%;
     background-repeat: no-repeat;
 }
-
 
 .astronaut,
 .earth,
