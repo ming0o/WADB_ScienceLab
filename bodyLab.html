@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Inter:wght@500&family=Rubik+Bubbles&display=swap');
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('./image/backnone.png'); /* 식탁이 있는 부엌 배경 이미지 */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* 배경 이미지를 고정시킴 */
+            height: 100vh;
+            overflow: hidden; /* 페이지의 내용이 넘치지 않도록 함 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        /* fix 신체 */
+        #eyes_fix {
+            position: absolute;
+            top: 9%;
+            right: 41.5%;
+            width: 160px; 
+            height: auto;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+        #eyes_fix.hint {
+            opacity: 0.5;
+            transition: all 0.3s;
+        }
+        #lung_fix {
+            position: absolute;
+            top: 21%;
+            left: 50%;
+            transform: translate(-51%,0);
+            width: 210px; 
+            height: auto;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+        #lung_fix.hint {
+            opacity: 0.5;
+            transition: all 0.3s;
+        }
+        #stoma_fix {
+            position: absolute;
+            top: 28.4%;
+            right: 39.5%;
+            width: 140px; 
+            height: auto;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+        #stoma_fix.hint {
+            opacity: 0.5;
+            transition: all 0.3s;
+        }
+        #liver_fix {
+            position: absolute;
+            top: 30.5%;
+            left: 37.5%;
+            width: 142px; 
+            height: auto;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+        #liver_fix.hint {
+            opacity: 0.5;
+            transition: all 0.3s;
+        }
+        #intest_fix {
+            position: absolute;
+            bottom: 54.6%;
+            left: 39.5%;
+            width: 200px; 
+            height: auto;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+        #intest_fix.hint {
+            opacity: 0.5;
+            transition: all 0.3s;
+        }
+        /* 테이블 위 신체 */
+        #eyes {
+            background-image: url("./image/eyes.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size : contain;
+            position: absolute;
+            top: 8%;
+            right: 12%;
+            width: 155px; 
+            height: 80px;
+        }
+        #lung {
+            background-image: url("./image/lung.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size : contain;
+            position: absolute;
+            position: absolute;
+            top: 20%;
+            right: 10%;
+            width: 200px; 
+            height: 190px;
+        }
+        #stoma {
+            background-image: url("./image/stoma.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size : contain;
+            position: absolute;
+            position: absolute;
+            top: 20%;
+            left: 17%;
+            width: 160px; 
+            height: 160px;
+        }
+        #liver {
+            background-image: url("./image/liver.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size : contain;
+            position: absolute;
+            position: absolute;
+            top: 5%;
+            left: 30%;
+            width: 140px; 
+            height: 140px;
+        }
+        #intest {
+            background-image: url("./image/intest.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size : contain;
+            position: absolute;
+            position: absolute;
+            top: 15%;
+            left: 43%;
+            width: 200px; 
+            height: 200px;
+        }
+        
+        #player_container{
+            /* background-color: pink; */
+            font-family: 'Inter';
+            position: absolute;
+            padding-top: 20px;
+            top: 25%;
+            left: 50%;
+            transform: translate(-50%);
+            width: 50%; 
+            height: 55%;
+            display: none;
+        }
+        #current_progress{
+            margin-block: 10px;
+            margin-inline: auto;
+            display: flex;
+            width: 80%;
+            justify-content: space-between;
+        }
+        #button_container{
+            width: 80%;
+            margin-block: 20px;
+            margin-inline: auto;
+            display: flex;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+        }
+        #current_song{
+            margin: 0;
+            /* width: 80%;
+            margin-inline: auto; */
+            color: #7BA4E1;
+        }
+        #current_singer{
+            margin: 0;
+            color: #A4A4A4;
+        }
+        #current_time{
+            color: #7BA4E1;
+            font-family: 'Inter';
+            font-size: 15px;
+        }
+        #total_time{
+            color: #7BA4E1;
+            font-family: 'Inter';
+            font-size: 15px;
+        }
+        #current_bar{
+            width: 80%;
+            height: 5px;
+            margin-inline: auto;
+
+            /* border: 3px solid transparent; */
+            border-radius: 5px;
+            background-color: #D9D9D9;
+            background-origin: border-box;
+            background-clip: content-box, border-box;
+        }
+        #progressBar{
+            background: #B6D2FF    
+        }
+        #play_button{
+            cursor: pointer;
+            margin-inline: 30px;
+        }
+        #back10_button{
+            cursor: pointer;
+        }
+        #for10_button{
+            cursor: pointer;
+        }
+        #progress_circle{
+            position: absolute;
+            /* top: 50%; */
+            /* left: 0; */
+            transform: translate(-50%, -25%);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #B6D2FF;
+        }
+        #table{
+            background-image: url("./image/tableLong.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size : contain;
+            position: absolute;
+            top: 530px;
+            right: 0;
+            width: 882px; 
+            height: 650px;
+        }
+        #top_light{
+            background-image: url("./image/lightFull.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size : contain;
+            /* background-color: bisque; */
+            position: absolute;
+            top: -60px;
+            right: -240px;
+            width: 1200px; 
+            height: 950px;
+
+        }
+        #body_container{
+            background-image: url("./image/bodyfig.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size : contain;
+            /* background-color: bisque; */
+            position: absolute;
+            top: 9%;
+            left: -7%;
+            width: 950px; 
+            height: 1900px;
+        }
+        #title_cover{
+            display: flex;
+            margin-inline: 53.146px;
+            margin-bottom: 10.920px;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+        }
+        #singer_cover{
+            display: flex;
+            margin-inline: 53.146px;
+            margin-bottom: 19.920px;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+        }
+        #animeTitle{
+            margin: 0 10px 0 0;
+            color: #7BA4E1;
+        }
+        #animeSinger1{
+            margin: 0 10px 0 0;
+            color: #A4A4A4;
+        }
+        #animeSinger2{
+            margin: 0;
+            color: #A4A4A4;
+        }
+        
+        @media (max-width: 1300px), (max-height:800px) {
+            #body_container{
+                /* top: 9%;
+                left: -7%; */
+                width: 700px; 
+                height: 1600px;
+            }
+            #eyes_fix{
+                top: 14%;
+                right: 41.5%;
+                width: 120px; 
+            }
+            #lung_fix {
+                top: 24.5%;
+                left: 50%;
+                transform: translate(-52%,0);
+                width: 154px; 
+            }
+            #stoma_fix {
+                top: 31%;
+                right: 40%;
+                width: 100px; 
+            }
+            #liver_fix {
+                top: 32.9%;
+                left: 37.5%;
+                width: 100px; 
+            }
+            #intest_fix {
+                bottom: 54.2%;
+                left: 39.5%;
+                width: 145px; 
+            }
+            #table{
+                top: 500px;
+                right: 0;
+                width: 682px; 
+                height: 450px;
+            }
+            #eyes {
+                top: 3%;
+                right: 10%;
+                width: 115px; 
+                height: 70px;
+            }
+            #lung {
+                top: 15%;
+                right: 8%;
+                width: 150px; 
+                height: 150px;
+            }
+            #stoma {
+                top: 20%;
+                left: 17%;
+                width: 120px; 
+                height: 120px;
+            }
+            #liver {
+                top: 2%;
+                left: 30%;
+                width: 110px; 
+                height: 110px;
+            }
+            #intest {
+                top: 12%;
+                left: 45%;
+                width: 150px; 
+                height: 150px;
+            }
+            #top_light{
+                top: -60px;
+                right: -240px;
+                width: 1050px; 
+                height: 750px;
+
+            }
+        }
+        
+        
+        #goBack_container{
+            position: absolute;
+            width: 200px;
+            height: 20px;
+            bottom: 0;
+        }
+        #big_goBack{
+            background-image: url("./image/bigGoBack.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size : contain;
+            width: inherit;
+            height: inherit;
+            display: none;
+            /* display: flex; */
+            justify-content: center;
+        }
+        #goBack_btn{
+            background-image: url("./image/goBackBtn.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size : contain;
+            position: absolute;
+            width: 120px;
+            height: 40px;
+            bottom: 20px;
+            /* left: 50%; */
+        }
+        #darkScreen{
+            background-color: black;
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            opacity: 0.3;
+        }
+        .full_screen {
+            width: 100%;
+            height: 100vh; 
+            background-color: #D6E6F3; 
+        }
+        #mainbg{
+            background-image: url("./image/main0.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size : contain;
+            position: absolute;
+            opacity: 1;
+            transition: all 0.3s;
+            top: 100%;
+        }
+        #enter1{
+            width: 15%;
+            height: 30%;
+            position: absolute;
+            top: 43%;
+            left: 15%;
+            /* opacity: 0.5;
+            background-color: red; */
+        }
+        #enter2{
+            width: 16%;
+            height: 30%;
+            position: absolute;
+            top: 43%;
+            left: 49%;
+            transform: translate(-50%);
+            /* opacity: 0.5;
+            background-color: black; */
+        }
+        #enter3{
+            width: 22%;
+            height: 30%;
+            position: absolute;
+            top: 45%;
+            right: 11%;
+            /* opacity: 0.5;
+            background-color: red; */
+        }
+        #hoverZone{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        #down_container{
+            position: absolute;
+            bottom: 0;
+            height: 50px;
+        }
+        #small_down{
+            background-image: url("./image/smallDown.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size : contain;
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            width: 100px;
+            height: 30px;
+            opacity: 1;
+            transform: translate(-50%);
+            transition: opacity 1s;
+        }
+        #big_down{
+            background-image: url("./image/bigDown.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size : contain;
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            width: 120px;
+            height: 40px;
+            opacity: 0;
+            transform: translate(-50%);
+            transition: opacity 1s;
+        }
+        #small_up{
+            background-image: url("./image/smallUp.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size : contain;
+            position: absolute;
+            top: 200px;
+            left: 50%;
+            width: 100px;
+            height: 30px;
+            opacity: 1;
+            transform: translate(-50%);
+            transition: opacity 1s;
+        }
+        #big_up{
+            background-image: url("./image/bigUp.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size : contain;
+            position: absolute;
+            top: 150px;
+            left: 50%;
+            width: 120px;
+            height: 40px;
+            opacity: 0;
+            transform: translate(-50%);
+            transition: opacity 1s;
+        }
+    </style>
+</head>
+<body>
+    <div id="top_light">
+        <div id="player_container">
+            <div id="title_cover">
+                <h1 id="animeTitle">Anime</h1>
+                <h1 id="current_song">Title</h1>
+            </div>
+            <div id="singer_cover">
+                <h2 id="animeSinger1">AnimeS1</h1>
+                <h2 id="current_singer">Singer</h1>
+                <h2 id="animeSinger2">AnimeS2</h1>
+            </div>
+            <div id="current_bar">
+                <div id="progressBar" style="width: 0; height: 5px;">
+                    <div id="progress_circle"></div>
+                </div>
+            </div>
+            <div id="current_progress">
+                <div id="current_time">
+                    0:00
+                </div>
+                <div id="total_time">
+                    3:00
+                </div>
+            </div>
+            <div id="button_container">
+                <img id="back10_button" src="./image/back10.png" alt="10초 뒤로 버튼" width="36px">
+                <img id="play_button" src="./image/pauseBtn.png" alt="플레이 버튼" width="50px">
+                <img id="for10_button" src="./image/for10.png" alt="10초 앞으로 버튼" width="36px">
+            </div>
+        </div>
+    </div>
+    
+
+    <div id="body_container">
+        <img id="eyes_fix" src="./image/eyes.png" alt="눈 이미지">
+        <img id="stoma_fix" src="./image/stoma.png" alt="위 이미지">
+        <img id="liver_fix" src="./image/liver.png" alt="간 이미지">
+        <img id="intest_fix" src="./image/intest.png" alt="장 이미지">
+        <img id="lung_fix" src="./image/lung.png" alt="폐 이미지">
+    </div>
+        
+    <div id="table">
+        <div id="eyes"></div>
+        <div id="lung"></div>
+        <div id="stoma"></div>
+        <div id="liver"></div>
+        <div id="intest"></div>
+    </div>
+    
+    <!-- 메인화면으로 전환  -->
+    <div id="darkScreen">
+        <div id="small_up"></div>
+        <div id="big_up"></div>
+    </div>
+    <div id="goBack_container">
+        <div id="big_goBack">
+            <div id="goBack_btn"></div>
+        </div>
+        <div id="down_container">
+            <div id="small_down"></div>
+            <div id="big_down"></div>
+        </div>
+    </div>
+    <div id="mainbg" class="full_screen">
+        <div id="hoverZone">
+            <div id="enter1"></div>
+            <div id="enter2"></div>
+            <div id="enter3"></div>
+        </div>
+    </div>
+    <!-- 메인화면으로 전환  -->
+    
+</body>
+<script>
+    // ================================================= 메인화면 전환 =================================================
+    function startMainUp(e) {
+        let y = e.pageY;
+        let windowHeight = window.innerHeight ;
+        let standard = windowHeight/2
+        if(y <= standard){
+            $("#small_up").css("background-image", "url(./image/smallUp2.png)");
+            $("#big_up").css("background-image", "url(./image/bigUp2.png)");
+            
+            currentAudio.pause()
+            setTimeout(function(){
+                $("#goBack_btn").css('opacity', '0')
+            }, 100)
+            setTimeout(function(){
+                $("#mainbg").css('top', 0)
+            }, 700)
+            
+        }
+    }
+    let downIndex = 0
+    let upIndex = 0
+    function changeDown () { 
+        setInterval(function () {
+            $('#small_down').css('opacity', downIndex)
+            downIndex = ((downIndex+1) % 2);
+            $('#big_down').css('opacity', downIndex)
+        }, 1000);
+    }
+    function changeUP () { 
+        setInterval(function () {
+            $('#small_up').css('opacity', upIndex)
+            upIndex = ((upIndex+1) % 2);
+            $('#big_up').css('opacity', upIndex)
+        }, 850);
+    }
+    changeDown();
+    changeUP();
+    $('#enter1').hover(function(){
+        hoverSoundPlay(0)
+        $("#mainbg").css("background-image", "url(./image/main1.png)");
+    },function() {
+        $("#mainbg").css("background-image", "url(./image/main0.png)");
+    });
+    $('#enter2').hover(function(){
+        hoverSoundPlay(1)
+        $("#mainbg").css("background-image", "url(./image/main2.png)");
+    },function() {
+        $("#mainbg").css("background-image", "url(./image/main0.png)");
+    });
+    $('#enter3').hover(function(){
+        hoverSoundPlay(2)
+        $("#mainbg").css("background-image", "url(./image/main3.png)");
+    },function() {
+        $("#mainbg").css("background-image", "url(./image/main0.png)");
+    });
+
+
+    // 버튼 이벤트
+    $('#enter1').click(function(){ 
+        window.location.href = 'beakerLab.html';
+    })
+    $('#enter2').click(function(){
+        window.location.href = 'bodyLab.html';
+    })
+    $('#enter3').click(function(){
+        window.location.href = 'paperLab.html';
+    })
+
+    // 현재 재생중인 오디오
+    let currentEAudio = new Audio()
+    let effectAudios = [
+        {
+            id: '1',
+            sound: 'beakerHtml',
+            audio: './musics/mainBeakerHoverSound.mp3'
+        },
+        {
+            id: '2',
+            sound: 'bodyHtml',
+            audio: './musics/mainBodyHoverSound.mp3'
+        },
+        {
+            id: '3',
+            sound: 'paperHtml',
+            audio: './musics/mainPaperHoverSound.mp3'
+        }
+    ]
+    function hoverSoundPlay (index){
+        if(index == 0){
+            let audio   = new Audio(effectAudios[index].audio)
+            currentEAudio.pause()
+            currentEAudio = audio
+            currentEAudio.currentTime = 0;
+            currentEAudio.play()
+        }
+        else if(index == 1){
+            let audio   = new Audio(effectAudios[index].audio)
+            currentEAudio.pause()
+            currentEAudio = audio
+            currentEAudio.currentTime = 0;
+            currentEAudio.play()
+        }
+        else if(index == 2){
+            let audio   = new Audio(effectAudios[index].audio)
+            currentEAudio.pause()
+            currentEAudio = audio
+            currentEAudio.currentTime = 0;
+            currentEAudio.play()
+        }
+    }
+    let goBackBtnHover = false
+    function detectResize() {
+        // 현재 윈도우 창의 너비와 높이 얻기
+        let windowWidth = window.innerWidth ;
+        let windowHeight = window.innerHeight ;
+        
+        goBackImgHeight = (136 * windowWidth)/1920
+        $("#goBack_container").css("width", windowWidth+'px');
+        $("#goBack_container").css("height", goBackImgHeight+'px');
+        $("#down_container").css("width", windowWidth+'px');
+
+        let standard = 9/16 // 기준 비율
+        let nowRatio = Number((windowHeight/windowWidth).toFixed(4))    // 현재 비율
+        let imgWidth;
+        let imgHeight;
+        if(nowRatio < standard){    // 현재 비율이 기준보다 작을때 오져따 이걸 이렇게 쉽게 해결하다니
+            imgWidth = (16 * windowHeight)/9
+            imgHeight = windowHeight
+            $("#hoverZone").css("width", imgWidth+'px');
+            $("#hoverZone").css("height", imgHeight+'px');
+        }
+        else if(nowRatio > standard){
+            imgHeight = (9 * windowWidth)/16
+            imgWidth = windowWidth
+            $("#hoverZone").css("width", imgWidth+'px');
+            $("#hoverZone").css("height", imgHeight+'px');
+        }
+
+
+    }
+
+    window.addEventListener('resize', detectResize);
+    detectResize();
+
+    $('#down_container').hover(function(){
+        $('#down_container').css('display', 'none')
+        $('#big_goBack').css('display', 'flex')
+    },function() {
+    });
+    $('#big_goBack').hover(function(){
+    },function() {
+        $('#down_container').css('display', 'block')
+        $('#big_goBack').css('display', 'none')
+    });
+    function addGoBackHover() {   // 제거했던 캐릭터 호버 이벤트 매핑해주는 역할
+        $('#down_container').on({
+            mouseenter: function() {
+                $('#down_container').css('display', 'none')
+                $('#big_goBack').css('display', 'flex')
+            },
+            mouseleave: function() {
+            }
+        });
+        $('#big_goBack').on({
+            mouseenter: function() {
+            },
+            mouseleave: function() {
+                $('#down_container').css('display', 'block')
+                $('#big_goBack').css('display', 'none')
+            }
+        });
+    }
+    // ================================================= 메인화면 전환 코드 끝 =================================================
+
+    let nowPlaying = 'none'
+    let dynamicMoveInterval;
+    let stomaIndex = 1;  // 현재 장기 이미지의 인덱스
+    let liverIndex = 1; 
+    let intestIndex = 1; 
+    let lungIndex = 1; 
+    let eyesIndex = 1; 
+
+    function movingEyes () { 
+        dynamicMoveInterval = setInterval(function () {
+            eyesIndex = (eyesIndex % 3) + 1; 
+            $('#eyes_fix').attr("src", "./image/eyes"+eyesIndex+".png");
+            console.log("눈 재생중!!")
+        }, 300);
+    }
+    function movingLung () { 
+        dynamicMoveInterval = setInterval(function () {
+            lungIndex = (lungIndex % 4) + 1; 
+            $('#lung_fix').attr("src", "./image/lung"+lungIndex+".png");
+            console.log("폐 재생중!!")
+        }, 300);
+    }
+    function movingStoma () { 
+        dynamicMoveInterval = setInterval(function () {
+            stomaIndex = (stomaIndex % 5) + 1;  // 1, 2, 3, 4, 5 순환
+            $('#stoma_fix').attr("src", "./image/stoma"+stomaIndex+".png");
+            console.log("위가 재생중!!")
+        }, 300);
+    }
+    function movingLiver () { 
+        dynamicMoveInterval = setInterval(function () {
+            liverIndex = (liverIndex % 3) + 1; 
+            $('#liver_fix').attr("src", "./image/liver"+liverIndex+".png");
+            console.log("간이 재생중!!")
+        }, 300);
+    }
+    function movingIntest () { 
+        dynamicMoveInterval = setInterval(function () {
+            intestIndex = (intestIndex % 5) + 1; 
+            $('#intest_fix').attr("src", "./image/intest"+intestIndex+".png");
+            console.log("대장 재생중!!")
+        }, 300);
+    }
+    
+    $("#eyes, #lung, #stoma, #liver, #intest").hover(function() {
+        $(this).css("background-image", "url(./image/"+this.id+"Big.png)");
+    }, function() {
+        $(this).css("background-image", "url(./image/"+this.id+".png)");
+    });
+
+    
+
+    let playerDisplay = false
+    // 현재 재생중인 오디오
+    let currentAudio = new Audio()
+
+    let audios = [
+        {
+            id: 'eyes',
+            audio: './musics/눈 (Prod. 기리보이).m4a',
+            image: './musics/00.png',
+            anime: '눈',
+            title: '(Prod. 기리보이)',
+            author: 'Lil tachi, 호치키스'
+        },
+        {
+            id: 'lung',
+            audio: './musics/산소같은 너.m4a',
+            image: './musics/01.png',
+            anime: '산소',
+            title: '같은 너',
+            author: '샤이니'
+        },
+        {
+            id: 'stoma',
+            audio: './musics/위아래.m4a',
+            image: './musics/02.png',
+            anime: '위',
+            title: '아래',
+            author: 'EXID'
+        },
+        {
+            id: 'liver',
+            audio: './musics/파파라치 (feat. 에릭).m4a',
+            image: './musics/02.png',
+            anime: '간',
+            title: '파파라치 (feat. 에릭)',
+            author: '미연'
+        },
+        {
+            id: 'intest',
+            audio: './musics/Lazenca, Save Us (우리 동네 음악대장).m4a',
+            image: './musics/02.png',
+            anime: '대장',
+            title: 'Lazenca, Save Us',
+            author: '우리 동네 음악'
+        }
+    ]
+    
+    
+
+    // 현재 시간 얻기
+    setInterval(function(){
+        let minutes = Math.floor(currentAudio.currentTime / 60);
+        let seconds = Math.floor(currentAudio.currentTime % 60);
+        let timeString = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+        $('#current_time').text(timeString);
+        minutes = Math.floor(currentAudio.duration / 60);
+        seconds = Math.floor(currentAudio.duration % 60);
+        timeString = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+        $('#total_time').text(timeString);
+
+        if($('#current_time').text() == $('#total_time').text()){
+            setTimeout(function(){
+                currentAudio.currentTime = 0
+                $('#play_button').attr("src", "./image/playBtn.png");
+            }, 1000)
+        }
+
+        let barWidth = $('#current_bar').innerWidth();
+        $('#current_bar > div').css('width', barWidth * currentAudio.currentTime / currentAudio.duration )
+        
+        $('#current_bar > div > div').css('left', (Number($('#current_bar').css('margin-left').slice(0,-2)) + Number($('#current_bar > div').css('width').slice(0,-2))) + 'px')
+    }, 50)
+    
+    $('#for10_button').click(function(){
+        currentAudio.currentTime += 10
+    })
+    $('#back10_button').click(function(){
+        currentAudio.currentTime -= 10
+    })
+    // 버튼 이벤트
+    $('#play_button').click(function(){ // 재생/일시정지
+        if(currentAudio.paused == true){
+            currentAudio.play()
+            if(nowPlaying == 'lung'){movingLung()}
+            else if(nowPlaying == 'stoma'){movingStoma()}
+            else if(nowPlaying == 'liver'){movingLiver()}
+            else if(nowPlaying == 'intest'){movingIntest()}
+            movingText(animeTag);
+            $('#play_button').attr("src", "./image/pauseBtn.png");
+        }
+        else{
+            currentAudio.pause()
+            stopText();
+            clearInterval(dynamicMoveInterval)
+            $('#play_button').attr("src", "./image/playBtn.png");
+        }
+    })
+    let animationTimeout;
+    let animeTag;
+    function movingText(animeTag) { // 강조하고싶은 글자 움직이게 만드는 함수
+        const cTitle = $(animeTag);
+        
+        function animate() {
+            cTitle.animate({'margin-top': -5}, 170).animate({'margin-top': 0}, 170)
+            cTitle.animate({'margin-top': -5}, 170).animate({'margin-top': 0}, 170)
+
+            animationTimeout = setTimeout(animate, 1400);
+        }
+        animate();
+        
+    }
+    function stopText() {
+        clearTimeout(animationTimeout);
+    }
+    
+    // ================================================메인화면 돌아가기=================================
+    let originalPosition1;
+    $( "#goBack_btn" ).draggable({ 
+        revert: "invalid",
+        start: function(event, ui) {
+            // 드래그를 시작할 때의 원래 위치 저장
+            originalPosition1 = ui.helper.offset();
+            $('#down_container, #big_goBack').off('mouseenter mouseleave');
+            $("#darkScreen").css('display', 'block')
+            $(document).on('mousemove', startMainUp);
+        },
+        stop: function(event, ui) {
+            $(document).off('mousemove', startMainUp);
+            // 드래그 종료시 원래 위치로 이동
+            $(this).offset(originalPosition1);
+            addGoBackHover()
+            $('#down_container').css('display', 'block')
+            $('#big_goBack').css('display', 'none')
+            $("#darkScreen").css('display', 'none')
+        }
+    });
+    // ================================================메인화면 돌아가기=================================
+    $( "#eyes" ).draggable({ revert: "invalid" });
+    $( "#lung" ).draggable({ revert: "invalid" });
+    $( "#stoma" ).draggable({ revert: "invalid" });
+    $( "#liver" ).draggable({ revert: "invalid" });
+    $( "#intest" ).draggable({ revert: "invalid" });
+    $( "#eyes_fix" ).droppable({
+        accept: "#eyes",
+        classes: {
+            "ui-droppable-active": "hint",
+        },
+        drop: function( event, ui ) {
+            $("#eyes").css("display", "none");
+            $("#eyes_fix").css("opacity", "100");
+            clearInterval(dynamicMoveInterval)
+            movingEyes()
+            for(let i in audios){
+                if(audios[i].id == "eyes"){
+                    // 오디오 정보 변수
+                    let audio   = new Audio(audios[i].audio)
+                    let image   = audios[i].image
+                    let title   = audios[i].title
+                    let author  = audios[i].author
+                    let ainme   = audios[i].anime
+
+                    $("#animeTitle").css('display', 'block');
+                    $("#animeSinger1").css('display', 'none');
+                    $("#animeSinger2").css('display', 'none');
+                    
+                    animeTag = "#animeTitle"
+                    $("#animeTitle").text(ainme);
+                    $("#current_song").text(title);
+                    stopText();
+                    movingText(animeTag)
+                    $("#current_singer").text(author);
+                    if(!playerDisplay){
+                        $("#player_container").css("display", "block");
+                        playerDisplay = true
+                    }
+                    if(currentAudio.paused == true){$('#play_button').attr("src", "./image/pauseBtn.png");} // pause상태에서 다른 장기 놨을때 플레이버튼 변경
+                    currentAudio.pause()
+                    currentAudio = audio
+                    currentAudio.currentTime = 0;
+                    currentAudio.volume = 0.3;  // 음악 소리 30퍼센트로 조절
+                    currentAudio.play()
+                }
+            }
+        }
+    })
+    $( "#stoma_fix" ).droppable({
+        accept: "#stoma",
+        classes: {
+            "ui-droppable-active": "hint",
+        },
+        drop: function( event, ui ) {
+            $("#stoma").css("display", "none");
+            $("#stoma_fix").css("opacity", "100");
+            clearInterval(dynamicMoveInterval) 
+            movingStoma()
+            nowPlaying = 'stoma'
+            for(let i in audios){
+                if(audios[i].id == "stoma"){
+                    let audio   = new Audio(audios[i].audio)
+                    let image   = audios[i].image
+                    let title   = audios[i].title
+                    let author  = audios[i].author
+                    let ainme   = audios[i].anime
+
+                    $("#animeTitle").css('display', 'block');
+                    $("#animeSinger1").css('display', 'none');
+                    $("#animeSinger2").css('display', 'none');
+                    
+                    animeTag = "#animeTitle"
+                    $("#animeTitle").text(ainme);
+                    $("#current_song").text(title);
+                    stopText();
+                    movingText(animeTag)
+                    $("#current_singer").text(author);
+                    if(!playerDisplay){
+                        $("#player_container").css("display", "block");
+                        playerDisplay = true
+                    }
+                    if(currentAudio.paused == true){$('#play_button').attr("src", "./image/pauseBtn.png");}
+                    currentAudio.pause()
+                    currentAudio = audio
+                    currentAudio.currentTime = 0;
+                    currentAudio.volume = 0.3;  // 음악 소리 30퍼센트로 조절
+                    currentAudio.play()
+                }
+            }
+        }
+    })
+    $( "#liver_fix" ).droppable({
+        accept: "#liver",
+        classes: {
+            "ui-droppable-active": "hint",
+        },
+        drop: function( event, ui ) {
+            $("#liver").css("display", "none");
+            $("#liver_fix").css("opacity", "100");
+            clearInterval(dynamicMoveInterval) 
+            movingLiver()
+            nowPlaying = 'liver'
+            for(let i in audios){
+                if(audios[i].id == "liver"){
+                    let audio   = new Audio(audios[i].audio)
+                    let image   = audios[i].image
+                    let title   = audios[i].title
+                    let author  = audios[i].author
+                    let ainme   = audios[i].anime
+
+                    $("#animeTitle").css('display', 'none');
+                    $("#animeSinger1").css('display', 'block');
+                    $("#animeSinger2").css('display', 'none');
+
+                    $("#current_song").text(title);
+                    $("#animeSinger1").text(ainme);
+                    $("#current_singer").text(author);
+                    animeTag = "#animeSinger1"
+                    stopText();
+                    movingText(animeTag)
+
+                    if(!playerDisplay){
+                        $("#player_container").css("display", "block");
+                        playerDisplay = true
+                    }
+                    if(currentAudio.paused == true){$('#play_button').attr("src", "./image/pauseBtn.png");}
+                    currentAudio.pause()
+                    currentAudio = audio
+                    currentAudio.currentTime = 0;
+                    currentAudio.volume = 0.3;  // 음악 소리 30퍼센트로 조절
+                    currentAudio.play()
+                }
+            }
+        }
+    })
+    $( "#intest_fix" ).droppable({
+        accept: "#intest",
+        classes: {
+            "ui-droppable-active": "hint",
+        },
+        drop: function( event, ui ) {
+            $("#intest").css("display", "none");
+            $("#intest_fix").css("opacity", "100");
+            clearInterval(dynamicMoveInterval)
+            movingIntest()
+            nowPlaying = 'intest'
+            for(let i in audios){
+                if(audios[i].id == "intest"){
+                    let audio   = new Audio(audios[i].audio)
+                    let image   = audios[i].image
+                    let title   = audios[i].title
+                    let author  = audios[i].author
+                    let ainme   = audios[i].anime
+
+                    $("#animeTitle").css('display', 'none');
+                    $("#animeSinger1").css('display', 'none');
+                    $("#animeSinger2").css('display', 'block');
+
+                    $("#current_song").text(title);
+                    $("#current_singer").text(author);
+                    $("#animeSinger2").text(ainme);
+                    animeTag = "#animeSinger2"
+                    stopText();
+                    movingText(animeTag)
+
+                    if(!playerDisplay){
+                        $("#player_container").css("display", "block");
+                        playerDisplay = true
+                    }
+                    if(currentAudio.paused == true){$('#play_button').attr("src", "./image/pauseBtn.png");}
+                    currentAudio.pause()
+                    currentAudio = audio
+                    currentAudio.currentTime = 0;
+                    currentAudio.volume = 0.3;  // 음악 소리 30퍼센트로 조절
+                    currentAudio.play()
+                }
+            }
+        }
+    })
+    $( "#lung_fix" ).droppable({
+        accept: "#lung",
+        classes: {
+            "ui-droppable-active": "hint",
+        },
+        drop: function( event, ui ) {
+            $("#lung").css("display", "none");
+            $("#lung_fix").css("opacity", "100");
+            clearInterval(dynamicMoveInterval)
+            movingLung()
+            nowPlaying = 'lung'
+            for(let i in audios){
+                if(audios[i].id == "lung"){
+                    let audio   = new Audio(audios[i].audio)
+                    let image   = audios[i].image
+                    let title   = audios[i].title
+                    let author  = audios[i].author
+                    let ainme   = audios[i].anime
+
+                    $("#animeTitle").css('display', 'block');
+                    $("#animeSinger1").css('display', 'none');
+                    $("#animeSinger2").css('display', 'none');
+                    
+                    animeTag = "#animeTitle"
+                    $("#animeTitle").text(ainme);
+                    $("#current_song").text(title);
+                    stopText();
+                    movingText(animeTag)
+                    $("#current_singer").text(author);
+                    if(!playerDisplay){
+                        $("#player_container").css("display", "block");
+                        playerDisplay = true
+                    }
+                    if(currentAudio.paused == true){$('#play_button').attr("src", "./image/pauseBtn.png");}
+                    currentAudio.pause()
+                    currentAudio = audio
+                    currentAudio.currentTime = 0;
+                    currentAudio.volume = 0.3;  // 음악 소리 30퍼센트로 조절
+                    currentAudio.play()
+                }
+            }
+        }
+    })
+</script>
+</html>
