@@ -1,0 +1,514 @@
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Inter:wght@500&family=Rubik+Bubbles&display=swap');
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('../image/backnone.png'); /* 식탁이 있는 부엌 배경 이미지 */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* 배경 이미지를 고정시킴 */
+    height: 100vh;
+    overflow: hidden; /* 페이지의 내용이 넘치지 않도록 함 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* fix 신체 */
+#eyes_fix {
+    position: absolute;
+    top: 9%;
+    right: 41.5%;
+    width: 160px; 
+    height: auto;
+    opacity: 0;
+    transition: all 0.3s;
+}
+#eyes_fix.hint {
+    opacity: 0.5;
+    transition: all 0.3s;
+}
+#lung_fix {
+    position: absolute;
+    top: 21%;
+    left: 50%;
+    transform: translate(-51%,0);
+    width: 210px; 
+    height: auto;
+    opacity: 0;
+    transition: all 0.3s;
+}
+#lung_fix.hint {
+    opacity: 0.5;
+    transition: all 0.3s;
+}
+#stoma_fix {
+    position: absolute;
+    top: 28.4%;
+    right: 39.5%;
+    width: 140px; 
+    height: auto;
+    opacity: 0;
+    transition: all 0.3s;
+}
+#stoma_fix.hint {
+    opacity: 0.5;
+    transition: all 0.3s;
+}
+#liver_fix {
+    position: absolute;
+    top: 30.5%;
+    left: 37.5%;
+    width: 142px; 
+    height: auto;
+    opacity: 0;
+    transition: all 0.3s;
+}
+#liver_fix.hint {
+    opacity: 0.5;
+    transition: all 0.3s;
+}
+#intest_fix {
+    position: absolute;
+    bottom: 54.6%;
+    left: 39.5%;
+    width: 200px; 
+    height: auto;
+    opacity: 0;
+    transition: all 0.3s;
+}
+#intest_fix.hint {
+    opacity: 0.5;
+    transition: all 0.3s;
+}
+/* 테이블 위 신체 */
+#eyes {
+    background-image: url("../image/eyes.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size : contain;
+    position: absolute;
+    top: 8%;
+    right: 12%;
+    width: 155px; 
+    height: 80px;
+}
+#lung {
+    background-image: url("../image/lung.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size : contain;
+    position: absolute;
+    position: absolute;
+    top: 20%;
+    right: 10%;
+    width: 200px; 
+    height: 190px;
+}
+#stoma {
+    background-image: url("../image/stoma.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size : contain;
+    position: absolute;
+    position: absolute;
+    top: 20%;
+    left: 17%;
+    width: 160px; 
+    height: 160px;
+}
+#liver {
+    background-image: url("../image/liver.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size : contain;
+    position: absolute;
+    position: absolute;
+    top: 5%;
+    left: 30%;
+    width: 140px; 
+    height: 140px;
+}
+#intest {
+    background-image: url("../image/intest.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size : contain;
+    position: absolute;
+    position: absolute;
+    top: 15%;
+    left: 43%;
+    width: 200px; 
+    height: 200px;
+}
+
+#player_container{
+    /* background-color: pink; */
+    font-family: 'Inter';
+    position: absolute;
+    padding-top: 20px;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%);
+    width: 50%; 
+    height: 55%;
+    display: none;
+}
+#current_progress{
+    margin-block: 10px;
+    margin-inline: auto;
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+}
+#button_container{
+    width: 80%;
+    margin-block: 20px;
+    margin-inline: auto;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+#current_song{
+    margin: 0;
+    /* width: 80%;
+    margin-inline: auto; */
+    color: #7BA4E1;
+}
+#current_singer{
+    margin: 0;
+    color: #A4A4A4;
+}
+#current_time{
+    color: #7BA4E1;
+    font-family: 'Inter';
+    font-size: 15px;
+}
+#total_time{
+    color: #7BA4E1;
+    font-family: 'Inter';
+    font-size: 15px;
+}
+#current_bar{
+    width: 80%;
+    height: 5px;
+    margin-inline: auto;
+
+    /* border: 3px solid transparent; */
+    border-radius: 5px;
+    background-color: #D9D9D9;
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+}
+#progressBar{
+    background: #B6D2FF    
+}
+#play_button{
+    cursor: pointer;
+    margin-inline: 30px;
+}
+#back10_button{
+    cursor: pointer;
+}
+#for10_button{
+    cursor: pointer;
+}
+#progress_circle{
+    position: absolute;
+    /* top: 50%; */
+    /* left: 0; */
+    transform: translate(-50%, -25%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #B6D2FF;
+}
+#table{
+    background-image: url("../image/tableLong.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size : contain;
+    position: absolute;
+    top: 530px;
+    right: 0;
+    width: 882px; 
+    height: 650px;
+}
+#top_light{
+    background-image: url("../image/lightFull.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size : contain;
+    /* background-color: bisque; */
+    position: absolute;
+    top: -60px;
+    right: -240px;
+    width: 1200px; 
+    height: 950px;
+
+}
+#body_container{
+    background-image: url("../image/bodyfig.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size : contain;
+    /* background-color: bisque; */
+    position: absolute;
+    top: 9%;
+    left: -7%;
+    width: 950px; 
+    height: 1900px;
+}
+#title_cover{
+    display: flex;
+    margin-inline: 53.146px;
+    margin-bottom: 10.920px;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+}
+#singer_cover{
+    display: flex;
+    margin-inline: 53.146px;
+    margin-bottom: 19.920px;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+}
+#animeTitle{
+    margin: 0 10px 0 0;
+    color: #7BA4E1;
+}
+#animeSinger1{
+    margin: 0 10px 0 0;
+    color: #A4A4A4;
+}
+#animeSinger2{
+    margin: 0;
+    color: #A4A4A4;
+}
+
+@media (max-width: 1300px), (max-height:800px) {
+    #body_container{
+        /* top: 9%;
+        left: -7%; */
+        width: 700px; 
+        height: 1600px;
+    }
+    #eyes_fix{
+        top: 14%;
+        right: 41.5%;
+        width: 120px; 
+    }
+    #lung_fix {
+        top: 24.5%;
+        left: 50%;
+        transform: translate(-52%,0);
+        width: 154px; 
+    }
+    #stoma_fix {
+        top: 31%;
+        right: 40%;
+        width: 100px; 
+    }
+    #liver_fix {
+        top: 32.9%;
+        left: 37.5%;
+        width: 100px; 
+    }
+    #intest_fix {
+        bottom: 54.2%;
+        left: 39.5%;
+        width: 145px; 
+    }
+    #table{
+        top: 500px;
+        right: 0;
+        width: 682px; 
+        height: 450px;
+    }
+    #eyes {
+        top: 3%;
+        right: 10%;
+        width: 115px; 
+        height: 70px;
+    }
+    #lung {
+        top: 15%;
+        right: 8%;
+        width: 150px; 
+        height: 150px;
+    }
+    #stoma {
+        top: 20%;
+        left: 17%;
+        width: 120px; 
+        height: 120px;
+    }
+    #liver {
+        top: 2%;
+        left: 30%;
+        width: 110px; 
+        height: 110px;
+    }
+    #intest {
+        top: 12%;
+        left: 45%;
+        width: 150px; 
+        height: 150px;
+    }
+    #top_light{
+        top: -60px;
+        right: -240px;
+        width: 1050px; 
+        height: 750px;
+
+    }
+}
+
+
+#goBack_container{
+    position: absolute;
+    width: 200px;
+    height: 20px;
+    bottom: 0;
+}
+#big_goBack{
+    background-image: url("../image/bigGoBack.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size : contain;
+    width: inherit;
+    height: inherit;
+    display: none;
+    /* display: flex; */
+    justify-content: center;
+}
+#goBack_btn{
+    background-image: url("../image/goBackBtn.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size : contain;
+    position: absolute;
+    width: 120px;
+    height: 40px;
+    bottom: 20px;
+    /* left: 50%; */
+}
+#darkScreen{
+    background-color: black;
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    opacity: 0.3;
+}
+.full_screen {
+    width: 100%;
+    height: 100vh; 
+    background-color: #D6E6F3; 
+}
+#mainbg{
+    background-image: url("../image/main0.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size : contain;
+    position: absolute;
+    opacity: 1;
+    transition: all 0.3s;
+    top: 100%;
+}
+#enter1{
+    width: 15%;
+    height: 30%;
+    position: absolute;
+    top: 43%;
+    left: 15%;
+    /* opacity: 0.5;
+    background-color: red; */
+}
+#enter2{
+    width: 16%;
+    height: 30%;
+    position: absolute;
+    top: 43%;
+    left: 49%;
+    transform: translate(-50%);
+    /* opacity: 0.5;
+    background-color: black; */
+}
+#enter3{
+    width: 22%;
+    height: 30%;
+    position: absolute;
+    top: 45%;
+    right: 11%;
+    /* opacity: 0.5;
+    background-color: red; */
+}
+#hoverZone{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#down_container{
+    position: absolute;
+    bottom: 0;
+    height: 50px;
+}
+#small_down{
+    background-image: url("../image/smallDown.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size : contain;
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    width: 100px;
+    height: 30px;
+    opacity: 1;
+    transform: translate(-50%);
+    transition: opacity 1s;
+}
+#big_down{
+    background-image: url("../image/bigDown.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size : contain;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    width: 120px;
+    height: 40px;
+    opacity: 0;
+    transform: translate(-50%);
+    transition: opacity 1s;
+}
+#small_up{
+    background-image: url("../image/smallUp.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size : contain;
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    width: 100px;
+    height: 30px;
+    opacity: 1;
+    transform: translate(-50%);
+    transition: opacity 1s;
+}
+#big_up{
+    background-image: url("../image/bigUp.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size : contain;
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    width: 120px;
+    height: 40px;
+    opacity: 0;
+    transform: translate(-50%);
+    transition: opacity 1s;
+}

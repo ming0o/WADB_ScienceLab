@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="top_light">
+        <div id="player_container">
+            <div id="title_cover">
+                <h1 id="animeTitle">Anime</h1>
+                <h1 id="current_song">Title</h1>
+            </div>
+            <div id="singer_cover">
+                <h2 id="animeSinger1">AnimeS1</h1>
+                    <h2 id="current_singer">Singer</h1>
+                        <h2 id="animeSinger2">AnimeS2</h1>
+            </div>
+            <div id="current_bar">
+                <div id="progressBar" style="width: 0; height: 5px;">
+                    <div id="progress_circle"></div>
+                </div>
+            </div>
+            <div id="current_progress">
+                <div id="current_time">
+                    0:00
+                </div>
+                <div id="total_time">
+                    3:00
+                </div>
+            </div>
+            <div id="button_container">
+                <img id="back10_button" src="../image/back10.png" alt="10초 뒤로 버튼" width="36px">
+                <img id="play_button" src="../image/pauseBtn.png" alt="플레이 버튼" width="50px">
+                <img id="for10_button" src="../image/for10.png" alt="10초 앞으로 버튼" width="36px">
+            </div>
+        </div>
+    </div>
+
+
+    <div id="body_container">
+        <img id="eyes_fix" src="../image/eyes.png" alt="눈 이미지">
+        <img id="stoma_fix" src="../image/stoma.png" alt="위 이미지">
+        <img id="liver_fix" src="../image/liver.png" alt="간 이미지">
+        <img id="intest_fix" src="../image/intest.png" alt="장 이미지">
+        <img id="lung_fix" src="../image/lung.png" alt="폐 이미지">
+    </div>
+
+    <div id="table">
+        <div id="eyes"></div>
+        <div id="lung"></div>
+        <div id="stoma"></div>
+        <div id="liver"></div>
+        <div id="intest"></div>
+    </div>
+
+    <!-- 메인화면으로 전환  -->
+    <div id="darkScreen">
+        <div id="small_up"></div>
+        <div id="big_up"></div>
+    </div>
+    <div id="goBack_container">
+        <div id="big_goBack">
+            <div id="goBack_btn"></div>
+        </div>
+        <div id="down_container">
+            <div id="small_down"></div>
+            <div id="big_down"></div>
+        </div>
+    </div>
+    <div id="mainbg" class="full_screen">
+        <div id="hoverZone">
+            <div id="enter1"></div>
+            <div id="enter2"></div>
+            <div id="enter3"></div>
+        </div>
+    </div>
+    <!-- 메인화면으로 전환  -->
+    <script src="scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Inter:wght@500&family=Rubik+Bubbles&display=swap');
+@font-face {
+    font-family: 'Kyuri_diary';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/naverfont_07@1.0/Kyuri_diary.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+.full_screen {
+    width: 100%;
+    height: 100vh; 
+    background-color: #D6E6F3; 
+}
+#mainbg{
+    background-image: url("./image/main0.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size : contain;
+    opacity: 1;
+    transition: all 0.3s;
+}
+#enter1{
+    width: 15%;
+    height: 30%;
+    position: absolute;
+    top: 43%;
+    left: 15%;
+}
+#enter2{
+    width: 16%;
+    height: 30%;
+    position: absolute;
+    top: 43%;
+    left: 49%;
+    transform: translate(-50%);
+}
+#enter3{
+    width: 22%;
+    height: 30%;
+    position: absolute;
+    top: 45%;
+    right: 11%;
+}
+#loading{
+    background-image: url("./image/main0.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size : contain;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    transition: all 0.5s;
+    overflow: hidden;
+    opacity: 1;
+}
+#left_door{
+    background-image: url("./image/mainDoorL.png");
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size : contain;
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 100%;
+    height: 100%;
+    transition: all 1s;
+}
+#right_door{
+    background-image: url("./image/mainDoorR.png");
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size : contain;
+    position: absolute;
+    top: 0;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    transition: all 1s;
+}
+.load_cont1{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(0,-50%);
+}
+.load_cont2{
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(0,-50%);
+}
+#door_container{
+    background-image: url("./image/main0.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size : contain;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#hoverZone{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
